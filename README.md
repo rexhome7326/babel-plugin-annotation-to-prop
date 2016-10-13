@@ -9,7 +9,7 @@ class YourClass {
 	 * @prop1: strValue1
 	 */
 	constructor() {
-		super();
+		//super();
 	}
 	
 	/**
