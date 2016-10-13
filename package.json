@@ -1,0 +1,30 @@
+{
+	"name": "babel-plugin-annotation-to-prop",
+	"version": "0.0.1",
+	"description": "make annotation of function in class to class static properties",
+	"license": "MIT",
+	"main": "lib/index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rexhome7326/babel-plugin-annotation-to-prop"
+	},
+	"scripts": {
+		"babel": "babel src --out-dir lib"
+	},
+	"files": [
+		"lib"
+	],
+	"keywords": [
+		"babel",
+		"compiler",
+		"replace",
+		"plugin",
+		"react",
+		"es6",
+		"runtime"
+	],
+	"dependencies": {
+		"babel-core": "^6.10.4"
+	},
+	"devDependencies": {}
+}
