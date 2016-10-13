@@ -31,7 +31,8 @@ to this
 ```
 ...
 
-YourClass.prop1 = "strValue1"
+YourClass.prop1 = "strValue1";
+YourClass.actionView={};
 YourClass.actionView.test1 = false;
 YourClass.actionView.test2 = "GET";
 YourClass.actionView.test3 = 123;

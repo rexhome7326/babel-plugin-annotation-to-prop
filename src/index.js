@@ -4,16 +4,17 @@ exports.default = function (babel) {
   return {
     visitor: {
       Program(path, state) {
-        var target = path.node.body.filter(function(node){
+        var target = path.node.body.filter(function (node) {
           return node.type === "ClassDeclaration";
         }).shift();
-        
-        if(target){
+
+        if (target) {
           var parentName = target.id.name;
-          
-          target.body.body.map(function(node){
-            if(node.leadingComments && node.leadingComments[0].type === 'CommentBlock'){
+
+          target.body.body.map(function (node) {
+            if (node.leadingComments && node.leadingComments[0].type === 'CommentBlock') {
               var left = parentName;
+              var isDefined = false;
               var comment = node.leadingComments[0].value.replace(/\*|\n|\t|\s/g, "");
               var commentList = comment.split("@");
 
@@ -21,10 +22,23 @@ exports.default = function (babel) {
                 if (index === 0) {
                   if (expression !== 'constructor') {
                     left += "." + expression;
+                    
+                    if(!isDefined){
+                      isDefined = true;
+                      
+                      var defLeft = left;
+                      var defRight = "{}";
+                      var defLeftExpression = t.identifier(defLeft);
+                      var defRightExpression = t.identifier(defRight);
+                      var defAssignmentExpression = t.AssignmentExpression("=", defLeftExpression, defRightExpression);
+                      var defExpressionStatement = t.ExpressionStatement(defAssignmentExpression);
+                      
+                      path.node.body.splice(-1, 0, defExpressionStatement);
+                    }
                   }
                 } else {
                   var expressionList = expression.split(":");
-                  var newLeft = left + "." + expressionList[0];console.log(newLeft);
+                  var newLeft = left + "['" + expressionList[0]+"']";
                   var newRight = /^\d+|true|false$/gi.test(expressionList[1]) ? expressionList[1] : '"' + expressionList[1] + '"';
                   var newLeftExpression = t.identifier(newLeft);
                   var newRightExpression = t.identifier(newRight);
