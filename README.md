@@ -1,29 +1,47 @@
-# babel-plugin-replace-import-src-to-where
+# babel-plugin-annotation-to-prop
 
-make your import or require path from this 
+make annotation of function in class to class static properties
 
 ```
-import aaa from "src/file/aaa/path";
-var bbb = require("src/file/bbb/path");
-var config = {
-	ccc: "src/file/ccc/path"
+class YourClass {
+	/**
+	 * constructor
+	 * @prop1: strValue1
+	 */
+	constructor() {
+		super();
+	}
+	
+	/**
+	 * actionView 
+	 * @test1: false
+	 * @test2: GET
+	 * @test3: 123
+	 */
+	actionView() {
+		//something
+	}
 }
+
+export default YourClass;
 ```
 
 to this
 
 ```
-import aaa from "lib/file/aaa/path";
-var bbb = require("lib/file/bbb/path");
-var config = {
-	ccc: "lib/file/ccc/path"
-}
+...
+
+YourClass.prop1 = "strValue1"
+YourClass.actionView.test1 = false;
+YourClass.actionView.test2 = "GET";
+YourClass.actionView.test3 = 123;
+export["default"] = YourClass;
 ```
 
 ## Install
 
 ```
-$ npm install babel-plugin-replace-import-src-to-where
+$ npm install babel-plugin-annotation-to-prop --save-dev
 ```
 
 ## Usage for your .babelrc
@@ -33,7 +51,7 @@ $ npm install babel-plugin-replace-import-src-to-where
 	"env": {
 		"dev": {
 			"plugins": [
-				"replace-import-src-to-where"
+				"annotation-to-prop"
 			]
 		}
 	}
