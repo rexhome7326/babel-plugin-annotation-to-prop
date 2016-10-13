@@ -1,4 +1,6 @@
-export default function ({types: t}) {
+exports.default = function (babel) {
+  var t = babel.types;
+  
   return {
     visitor: {
       ClassMethod(path, state){
@@ -32,3 +34,5 @@ export default function ({types: t}) {
     }
   };
 }
+
+module.exports = exports["default"];
