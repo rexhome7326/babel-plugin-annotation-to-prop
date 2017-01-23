@@ -14,11 +14,12 @@ exports.default = function (babel) {
           if(target.body && target.body.body && target.body.body.length > 0){
             for(var i = 0; i < target.body.body.length; i++){
               var node = target.body.body[i];
+              var leadingCommentsIndex = node.leadingComments ? node.leadingComments.length - 1 : 0;
               
-              if (node.leadingComments && node.leadingComments[0].type === 'CommentBlock') {
+              if (node.leadingComments && node.leadingComments[leadingCommentsIndex].type === 'CommentBlock') {
                 var left = parentName;
                 var isDefined = false;
-                var comment = node.leadingComments[0].value.replace(/\*|\n|\t/g, "");
+                var comment = node.leadingComments[leadingCommentsIndex].value.replace(/\*|\n|\t/g, "");
                 
                 if(comment){
                   var commentList = comment.split("@");
