@@ -1,6 +1,6 @@
 {
 	"name": "babel-plugin-annotation-to-prop",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "make annotation of function in class to class static properties",
 	"license": "MIT",
 	"main": "lib/index.js",
@@ -9,7 +9,8 @@
 		"url": "https://github.com/rexhome7326/babel-plugin-annotation-to-prop"
 	},
 	"scripts": {
-		"babel": "babel src --out-dir lib"
+		"babel": "babel src --out-dir lib",
+		"prepublish": "npm run babel"
 	},
 	"files": [
 		"lib"
